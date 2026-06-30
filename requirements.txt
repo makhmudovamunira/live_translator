@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+sqlalchemy
+sqlalchemy-utils
+pydantic
+python-dotenv
+werkzeug
+another-fastapi-jwt-auth
+psycopg2-binary

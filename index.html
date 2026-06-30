@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Voice Translator</title>
+</head>
+<body>
+
+<h2>Ovoz tarjimoni</h2>
+
+<input type="file" id="audioFile">
+
+<button onclick="upload()">Tarjima qilish</button>
+
+<h3>Natija</h3>
+
+<p><b>Original:</b></p>
+<p id="original"></p>
+
+<p><b>Translation:</b></p>
+<p id="translation"></p>
+
+<script>
+
+async function upload(){
+
+    let file=document.getElementById("audioFile").files[0];
+
+    if(!file){
+        alert("Audio tanlang");
+        return;
+    }
+
+    let formData=new FormData();
+
+    formData.append("file",file);
+
+    let response=await fetch("http://127.0.0.1:8000/translate/voice",{
+
+        method:"POST",
+
+        body:formData
+
+    });
+
+    let data=await response.json();
+
+    console.log(data);
+
+    document.getElementById("original").innerHTML=data.original_text;
+
+    document.getElementById("translation").innerHTML=data.translated_text;
+
+}
+
+</script>
+
+</body>
+</html>
